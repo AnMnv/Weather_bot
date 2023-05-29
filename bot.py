@@ -36,10 +36,10 @@ class WeatherStates(StatesGroup):
 
 #@dp.message_handler(commands=['start'])
 async def send_weatherr(message: types.Message):
-    response_text_morning = requests.get('https://ru.wttr.in/Barcelona_tomorrow_morning?format=%c+🌡️%t+💦+%h+🌧+%p+💨+%w')
-    response_text_day = requests.get('https://ru.wttr.in/Barcelona_tomorrow_day?format=%c+🌡️%t+💦+%h+🌧+%p+💨+%w')
+    response_text_morning = requests.get('https://ru.wttr.in/Barcelona_tomorrow_morning?format=%c+ 🌡️%t+💦+%h+🌧+%p+💨+%w')
+    response_text_day =     requests.get('https://ru.wttr.in/Barcelona_tomorrow_day?format=%c+🌡️%t+💦+%h+🌧+%p+💨+%w')
     response_text_evening = requests.get('https://ru.wttr.in/Barcelona_tomorrow_evening?format=%c+🌡️%t+💦+%h+🌧+%p+💨+%w')
-    response_text_night = requests.get('https://ru.wttr.in/Barcelona_tomorrow_night?format=%c+🌡️%t+💦+%h+🌧+%p+💨+%w')
+    response_text_night =   requests.get('https://ru.wttr.in/Barcelona_tomorrow_night?format=%c+ 🌡️%t+💦+%h+🌧+%p+💨+%w')
                                  #\n+Фаза луны/день +%m+%M\n+Давление %P\n+UV index %u')
     weather_data_morning    = response_text_morning.text
     weather_data_day        = response_text_day.text
@@ -47,7 +47,7 @@ async def send_weatherr(message: types.Message):
     weather_data_night      = response_text_night.text
 
     await bot.send_message(chat, text=f"Погода на завтра \nУтро {weather_data_morning}\nДень {weather_data_day}\nВечер{weather_data_evening}\nНочь  {weather_data_night}", parse_mode='html')
-    await bot.send_message(chat2, text=f"Погода на завтра \nУтро {weather_data_morning}\nДень {weather_data_day}\nВечер{weather_data_evening}\nНочь  {weather_data_night}", parse_mode='html')
+    await bot.send_message(chat2, text=f"Погода на завтра \nУтро {weather_data_morning}\nДень {weather_data_day}\nВечер{weather_data_evening}\nНочь  {weather_data_night}", parse_mode='markdown')
 
 
 async def scheduled_weather():
