@@ -17,9 +17,9 @@ bot_token = TOKEN
 bot = Bot(token=bot_token)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
-#chat = '-1001655157125' # Barselona
+chat = '-1001655157125' # Barselona
 #chat = '-1001339593916'
-chat = '-961987561'
+#chat = '-961987561'
 class WeatherStates(StatesGroup):
     waiting_for_weather = State()
 
@@ -52,7 +52,7 @@ async def send_weatherr(message: types.Message):
 async def scheduled_weather():
     while True:
         now = datetime.datetime.now()
-        if now.hour == 21 and now.minute == 36:
+        if now.hour == 19 and now.minute == 0:
             await send_weatherr(types.Message)
         await asyncio.sleep(60)  # Проверка каждую минуту
 
