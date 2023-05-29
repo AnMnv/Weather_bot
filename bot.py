@@ -17,9 +17,9 @@ bot_token = TOKEN
 bot = Bot(token=bot_token)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
-#chat = '-1001655157125' # Barselona
+chat = '-1001655157125' # Barselona
 #chat = '-1001339593916'
-chat = '-961987561'
+#chat = '-961987561'
 class WeatherStates(StatesGroup):
     waiting_for_weather = State()
 
@@ -36,20 +36,23 @@ class WeatherStates(StatesGroup):
 
 #@dp.message_handler(commands=['start'])
 async def send_weatherr(message: types.Message):
-    response = requests.get('https://v1.wttr.in/Barcelona_M_lang=ru.png')
-    response1 = requests.get('https://v2.wttr.in/Barcelona_M_lang=ru.png')
-    response_text = requests.get('https://ru.wttr.in/Barcelona?format=%l:\n+%C+%c+%t\n+Влажность   \t+%h\n+Ветер              +%w')
+    response_text_morning = requests.get('https://ru.wttr.in/Barcelona_tomorrow_morning?format=%c+🌡️%t+💦+%h+🌧+%p+💨+%w')
+    response_text_day = requests.get('https://ru.wttr.in/Barcelona_tomorrow_day?format=%c+🌡️%t+💦+%h+🌧+%p+💨+%w')
+    response_text_evening = requests.get('https://ru.wttr.in/Barcelona_tomorrow_evening?format=%c+🌡️%t+💦+%h+🌧+%p+💨+%w')
+    response_text_night = requests.get('https://ru.wttr.in/Barcelona_tomorrow_night?format=%c+🌡️%t+💦+%h+🌧+%p+💨+%w')
                                  #\n+Фаза луны/день +%m+%M\n+Давление %P\n+UV index %u')
-    weather_data = response_text.text
-    # Отправка фотографии
-    await bot.send_photo(chat, photo=response.content)
-    await bot.send_photo(chat, photo=response1.content, caption=f"{weather_data}")
+    weather_data_morning    = response_text_morning.text
+    weather_data_day        = response_text_day.text
+    weather_data_evening    = response_text_evening.text
+    weather_data_night      = response_text_night.text
+
+    await bot.send_message(chat, text=f"Погода на завтра \nУтро {weather_data_morning}\nДень {weather_data_day}\nВечер{weather_data_evening}\nНочь  {weather_data_night}", parse_mode='html')
 
 
 async def scheduled_weather():
     while True:
         now = datetime.datetime.now()
-        if now.hour == 21 and now.minute == 36:
+        if now.hour == 19 and now.minute == 0:
             await send_weatherr(types.Message)
         await asyncio.sleep(60)  # Проверка каждую минуту
 
