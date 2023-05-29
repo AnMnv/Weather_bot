@@ -19,7 +19,7 @@ storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 chat = '-1001655157125' # Barselona
 #chat = '-1001339593916'
-#chat = '-961987561'
+chat2 = '-961987561'
 class WeatherStates(StatesGroup):
     waiting_for_weather = State()
 
@@ -47,6 +47,7 @@ async def send_weatherr(message: types.Message):
     weather_data_night      = response_text_night.text
 
     await bot.send_message(chat, text=f"Погода на завтра \nУтро {weather_data_morning}\nДень {weather_data_day}\nВечер{weather_data_evening}\nНочь  {weather_data_night}", parse_mode='html')
+    await bot.send_message(chat2, text=f"Погода на завтра \nУтро {weather_data_morning}\nДень {weather_data_day}\nВечер{weather_data_evening}\nНочь  {weather_data_night}", parse_mode='html')
 
 
 async def scheduled_weather():
