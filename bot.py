@@ -55,7 +55,6 @@ async def scheduled_weather():
         if now.hour == 19 and now.minute == 0:
             await send_weatherr(types.Message)
         await asyncio.sleep(60)  # Проверка каждую минуту
-
  
 
 
