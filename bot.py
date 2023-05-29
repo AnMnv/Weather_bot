@@ -49,7 +49,6 @@ async def send_weatherr(message: types.Message):
     await bot.send_message(chat, text=f"Погода на завтра \nУтро {weather_data_morning}\nДень {weather_data_day}\nВечер{weather_data_evening}\nНочь  {weather_data_night}", parse_mode='html')
     await bot.send_message(chat2, text=f"Погода на завтра \nУтро {weather_data_morning}\nДень {weather_data_day}\nВечер{weather_data_evening}\nНочь  {weather_data_night}", parse_mode='markdown')
 
-
 async def scheduled_weather():
     while True:
         now = datetime.datetime.now()
